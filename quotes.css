@@ -1,0 +1,260 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+@font-face {
+    font-family: "manrope";
+    src: url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap");
+}
+
+@font-face {
+    font-family: "rasmee";
+    src: url(rasmee.ttf) format("truetype");
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+
+    --body-background: #455464;
+    --body-gradient-top: #56697b;
+    --body-gradient-bottom: #394754;
+
+    --surface: #667b8e;
+    --surface-hover: #72889c;
+
+    --quote-background: #6b8092;
+    --quote-background-hover: #7890a3;
+
+    --text-color: #edf3f8;
+    --text-muted: #d1dde7;
+    --heading-color: #f7fbff;
+    --author-color: #bfd1df;
+
+    --accent: #9bb5ca;
+    --accent-hover: #aec6d8;
+
+    --input-background: rgba(255, 255, 255, 0.08);
+    --input-border: rgba(255, 255, 255, 0.12);
+    --input-placeholder: rgba(255, 255, 255, 0.55);
+
+    --button-background: #839caf;
+    --button-hover: #96afc1;
+    --button-text: #f7fbff;
+
+    --border-color: rgba(255, 255, 255, 0.08);
+    --border-hover: rgba(255, 255, 255, 0.16);
+
+    --shadow: 0 8px 24px rgba(10, 18, 30, 0.20);
+    --shadow-hover: 0 16px 36px rgba(10, 18, 30, 0.32);
+
+    --radius: 20px;
+}
+
+/* ============================== */
+
+body {
+    background: linear-gradient(
+        180deg,
+        var(--body-gradient-top),
+        var(--body-gradient-bottom)
+    );
+    color: var(--text-color);
+    font-family: "manrope", sans-serif;
+    padding: 1.5rem;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.title {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--heading-color);
+}
+
+.quote-of-the-day {
+    background: var(--quote-background);
+    padding: 1rem 2rem;
+    margin-bottom: 2rem;
+    border-left: 4px solid var(--accent);
+    border-radius: var(--radius);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+}
+
+.quote-of-the-day h2 {
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+    color: var(--heading-color);
+}
+
+.quote-text {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+.author-text {
+    text-align: right;
+    font-style: italic;
+    color: var(--author-color);
+    margin-top: 0.5rem;
+}
+
+.dhivehi.author-text {
+    text-align: left;
+}
+
+#search {
+    margin-top: 1rem;
+    padding: 0.75rem 1rem;
+    width: 100%;
+    max-width: 400px;
+
+    background: var(--input-background);
+    color: var(--text-color);
+
+    border: 1px solid var(--input-border);
+    border-radius: 12px;
+
+    font-size: 1rem;
+    outline: none;
+
+    transition: 0.25s ease;
+}
+
+#search::placeholder {
+    color: var(--input-placeholder);
+}
+
+#search:focus {
+    border-color: var(--accent);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+.card {
+    background: var(--quote-background);
+
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+
+    padding: 1.5rem;
+
+    box-shadow: var(--shadow);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        background-color .25s ease;
+}
+
+.card:hover {
+    background: var(--quote-background-hover);
+    border-color: var(--border-hover);
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+}
+
+.card .quote {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.card .author {
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--author-color);
+    text-align: right;
+}
+
+.dhivehi .quote {
+    direction: rtl;
+    text-align: right;
+    font-family: "rasmee", "manrope", sans-serif;
+}
+
+.dhivehi .author {
+    text-align: left;
+    font-family: "rasmee", "manrope", sans-serif;
+}
+
+#load-more {
+    display: block;
+
+    margin: 2rem auto;
+    padding: 0.8rem 2rem;
+
+    background: var(--button-background);
+    color: var(--button-text);
+
+    border: none;
+    border-radius: 12px;
+
+    font-size: 1rem;
+    cursor: pointer;
+
+    transition:
+        background-color .25s ease,
+        transform .25s ease;
+}
+
+#load-more:hover {
+    background: var(--button-hover);
+    transform: translateY(-2px);
+}
+
+.card.centered-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    text-align: center;
+    min-height: 150px;
+}
+
+.card.centered-text .quote {
+    font-size: 1.2em;
+}
+
+.card .quote.no-quotes::before,
+.card .quote.no-quotes::after {
+    content: none;
+}
+
+.semester {
+    margin-top: 3rem;
+}
+
+.semester h2 {
+    color: var(--heading-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.semester h2::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--border-color);
+}

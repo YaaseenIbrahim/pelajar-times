@@ -1,0 +1,426 @@
+:root {
+	--background: #455464;
+	--background-dark: #394754;
+
+	--surface: #667b8e;
+
+	--text: #edf3f8;
+	--muted: #d1dde7;
+	--heading: #f7fbff;
+
+	--accent: #9bb5ca;
+
+	--shadow: 0 25px 70px rgba(10, 18, 30, 0.45);
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	font-family: "Inter", Arial, Helvetica, sans-serif;
+
+	background: linear-gradient(
+		180deg,
+		var(--background),
+		var(--background-dark)
+	);
+
+	color: var(--text);
+
+	overflow-x: hidden;
+}
+
+/* =====================
+   HERO
+===================== */
+
+.hero {
+	height: 100svh;
+
+	position: relative;
+
+	display: flex;
+
+	align-items: center;
+
+	justify-content: center;
+
+	overflow: hidden;
+}
+
+/* =====================
+   BACKGROUND
+===================== */
+
+.background-photo {
+	position: absolute;
+
+	inset: -50px;
+
+	background-image: url("images/pelajar background 1.jpeg");
+
+	background-size: cover;
+
+	background-position: center;
+
+	filter: brightness(0.45) saturate(0.9);
+
+	transform: translate(var(--bg-x, 0px), var(--bg-y, 0px)) scale(1.15);
+
+	z-index: 0;
+
+	transition: transform 0.2s ease-out;
+}
+
+.background-overlay {
+	position: absolute;
+
+	inset: 0;
+
+	background: linear-gradient(
+		180deg,
+		rgba(40, 50, 60, 0.2),
+		rgba(40, 50, 60, 0.85)
+	);
+
+	z-index: 1;
+}
+
+/* =====================
+   MEMORY COLLAGE
+===================== */
+
+#memory-wall {
+	position: absolute;
+
+	inset: 0;
+
+	z-index: 2;
+
+	pointer-events: none;
+
+	overflow: hidden;
+}
+
+.memory {
+	position: absolute;
+
+	background: rgba(143, 139, 139, 0.527);
+
+	padding: 8px;
+
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+
+	opacity: 0.78;
+
+	will-change: transform;
+
+	animation: photoFloat var(--float-time) ease-in-out infinite alternate;
+
+	animation-delay: var(--float-delay);
+
+	transition: transform 0.4s ease;
+}
+
+.memory img {
+	width: 100%;
+
+	height: 100%;
+
+	object-fit: cover;
+
+	display: block;
+}
+
+.memory:hover {
+	opacity: 0.78;
+}
+
+/* =====================
+   MASTHEAD
+===================== */
+
+.masthead {
+	position: relative;
+
+	z-index: 10;
+
+	text-align: center;
+
+	padding: 30px;
+
+	text-shadow: 0 15px 60px rgba(0, 0, 0, 0.8);
+
+	transition: transform 0.2s ease-out;
+}
+
+.edition {
+	display: flex;
+
+	justify-content: center;
+
+	align-items: center;
+
+	flex-wrap: wrap;
+
+	gap: 18px;
+
+	margin-bottom: 35px;
+
+	font-size: 12px;
+
+	letter-spacing: 5px;
+
+	font-weight: 700;
+
+	color: var(--accent);
+}
+
+.edition span {
+	position: relative;
+}
+
+.edition span:not(:last-child)::after {
+	content: "•";
+
+	margin-left: 18px;
+
+	color: rgba(255, 255, 255, 0.5);
+}
+
+.masthead h1 {
+	font-size: clamp(80px, 16vw, 190px);
+
+	line-height: 0.78;
+
+	font-weight: 900;
+
+	letter-spacing: -10px;
+
+	color: var(--heading);
+}
+
+.masthead h1 span {
+	display: block;
+
+	letter-spacing: -8px;
+}
+
+.masthead p {
+	margin-top: 35px;
+
+	max-width: 700px;
+
+	margin-left: auto;
+
+	margin-right: auto;
+
+	font-size: clamp(16px, 2vw, 24px);
+
+	line-height: 1.6;
+
+	color: var(--muted);
+}
+
+/* =====================
+   SCROLL
+===================== */
+
+.scroll-indicator {
+	margin-top: 80px;
+
+	display: flex;
+
+	flex-direction: column;
+
+	align-items: center;
+
+	gap: 20px;
+
+	animation: scrollFloat 3s ease-in-out infinite;
+}
+
+.scroll-indicator .line {
+	height: 70px;
+
+	width: 2px;
+
+	background: linear-gradient(
+		transparent,
+		rgba(255, 255, 255, 0.9),
+		transparent
+	);
+}
+
+.scroll-indicator span {
+	font-size: 11px;
+
+	letter-spacing: 5px;
+
+	font-weight: 700;
+
+	color: var(--accent);
+}
+
+/* =====================
+   NEWS PLACEHOLDER
+===================== */
+
+.news-title {
+	height: 45vh;
+
+	display: flex;
+
+	align-items: center;
+
+	justify-content: center;
+
+	background: linear-gradient(
+		180deg,
+		var(--background-dark),
+		var(--background)
+	);
+}
+
+.news-title h2 {
+	font-size: clamp(70px, 12vw, 160px);
+
+	font-weight: 900;
+
+	letter-spacing: -8px;
+
+	color: var(--heading);
+}
+
+/* =====================
+   ANIMATIONS
+===================== */
+
+@keyframes photoFloat {
+	0% {
+		margin-top: 0;
+	}
+
+	100% {
+		margin-top: -18px;
+	}
+}
+
+@keyframes scrollFloat {
+	0% {
+		transform: translateY(0);
+	}
+
+	50% {
+		transform: translateY(12px);
+	}
+
+	100% {
+		transform: translateY(0);
+	}
+}
+
+/* =====================
+   TABLET
+===================== */
+
+@media (max-width: 900px) {
+	.masthead h1 {
+		letter-spacing: -6px;
+	}
+
+	.masthead h1 span {
+		letter-spacing: -5px;
+	}
+
+	.memory {
+		padding: 8px;
+	}
+
+	.background-photo {
+		filter: brightness(0.5) saturate(0.85);
+	}
+}
+
+/* =====================
+   MOBILE
+===================== */
+
+@media (max-width: 600px) {
+	.hero {
+		height: 100svh;
+	}
+
+	.background-photo {
+		inset: -30px;
+
+		transform: scale(1.15);
+	}
+
+	.background-overlay {
+		background: linear-gradient(
+			180deg,
+			rgba(40, 50, 60, 0.25),
+			rgba(40, 50, 60, 0.9)
+		);
+	}
+
+	.edition {
+		font-size: 10px;
+
+		letter-spacing: 3px;
+
+		gap: 10px;
+	}
+
+	.masthead {
+		padding: 20px;
+	}
+
+	.masthead h1 {
+		font-size: 4.5rem;
+
+		letter-spacing: -4px;
+	}
+
+	.masthead h1 span {
+		letter-spacing: -3px;
+	}
+
+	.masthead p {
+		font-size: 15px;
+
+		max-width: 330px;
+
+		margin-top: 25px;
+	}
+
+	.scroll-indicator {
+		margin-top: 50px;
+	}
+
+	.scroll-indicator .line {
+		height: 45px;
+	}
+
+	.news-title {
+		height: 35vh;
+	}
+
+	.news-title h2 {
+		letter-spacing: -3px;
+	}
+
+	.memory {
+		opacity: 0.7;
+
+		padding: 6px;
+	}
+}
