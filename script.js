@@ -1,5 +1,9 @@
 const memoryWall = document.getElementById("memory-wall");
 
+const hero = document.querySelector(".hero");
+
+const masthead = document.querySelector(".masthead");
+
 const memories = [
 	"pelajar background 1.jpeg",
 	"pelajar background 2.jpeg",
@@ -15,11 +19,7 @@ const memories = [
 	"pelajar background 12.jpeg",
 ];
 
-function random(min, max) {
-	return Math.random() * (max - min) + min;
-}
-
-function createMemory(image) {
+memories.forEach((image) => {
 	const frame = document.createElement("div");
 
 	frame.className = "memory";
@@ -30,164 +30,109 @@ function createMemory(image) {
 
 	img.loading = "lazy";
 
+	img.draggable = false;
+
 	frame.appendChild(img);
 
-	const isMobile = window.innerWidth < 800;
-
-	/*
-        Random sizes
-        but controlled
-    */
-
-	const size = isMobile ? random(90, 140) : random(130, 240);
-
-	frame.style.width = `${size}px`;
-
-	frame.style.height = `${size * 1.25}px`;
-
-	/*
-        Safe positioning
-        Keeps center clear
-    */
-
-	let x;
-	let y;
-
-	if (isMobile) {
-		x = random(3, 75);
-
-		y = random(5, 80);
-	} else {
-		x = random(2, 82);
-
-		y = random(5, 82);
-	}
-
-	frame.style.left = `${x}%`;
-
-	frame.style.top = `${y}%`;
-
-	/*
-        Same opacity
-    */
-
-	frame.style.opacity = "0.5";
-
-	/*
-        Random rotation only
-    */
-
-	const rotation = random(-18, 18);
-
-	frame.style.transform = `rotate(${rotation}deg)`;
-
-	/*
-        Same layer
-        ALWAYS behind title
-    */
-
-	frame.style.zIndex = "2";
-
-	/*
-        Slight movement variation
-    */
-
-	frame.style.setProperty("--float-time", `${random(8, 14)}s`);
-
-	frame.style.setProperty("--float-delay", `${random(-5, 0)}s`);
-
 	memoryWall.appendChild(frame);
-}
-
-memories.forEach((image) => {
-	createMemory(image);
 });
-
 /*
-    Mouse parallax
-    Background + photos + title
+    PARALLAX
 */
-
-const hero = document.querySelector(".hero");
-
-const masthead = document.querySelector(".masthead");
 
 const photos = document.querySelectorAll(".memory");
 
+let mouseX = 0;
+let mouseY = 0;
+
+let currentX = 0;
+let currentY = 0;
+
 document.addEventListener("mousemove", (e) => {
-	if (window.innerWidth < 800) return;
+	if (window.innerWidth <= 700) return;
 
-	const x = e.clientX / window.innerWidth - 0.5;
-
-	const y = e.clientY / window.innerHeight - 0.5;
-
-	/*
-        Background moves most
-    */
-
-	hero.style.setProperty(
-		"--bg-x",
-
-		`${x * 30}px`,
-	);
-
-	hero.style.setProperty(
-		"--bg-y",
-
-		`${y * 30}px`,
-	);
-
-	/*
-        Photos move slightly
-    */
-
-	photos.forEach((photo) => {
-		photo.style.marginLeft = `${x * 12}px`;
-
-		photo.style.marginTop = `${y * 12}px`;
-	});
-
-	/*
-        Title moves least
-    */
-
-	masthead.style.transform = `
-    translate(
-    ${x * -8}px,
-    ${y * -8}px
-    )
-    `;
+	mouseX = e.clientX / window.innerWidth - 0.5;
+	mouseY = e.clientY / window.innerHeight - 0.5;
 });
 
 /*
-    Mobile gentle movement
+    Save each photo's original rotation
 */
 
-if (window.innerWidth < 800) {
-	photos.forEach((photo) => {
-		const amountX = random(-12, 12);
+photos.forEach((photo) => {
+	photo.dataset.baseTransform = window.getComputedStyle(photo).transform;
+});
 
-		const amountY = random(-15, 15);
+/*
+    Main animation loop
+*/
+
+function animate() {
+	currentX += (mouseX - currentX) * 0.08;
+	currentY += (mouseY - currentY) * 0.08;
+
+	/*
+        Background
+    */
+
+	hero.style.setProperty("--bg-x", `${currentX * 35}px`);
+
+	hero.style.setProperty("--bg-y", `${currentY * 35}px`);
+
+	/*
+        Title
+    */
+
+	masthead.style.transform = `
+translate(
+${currentX * -8}px,
+${currentY * -8}px
+)
+`;
+
+	/*
+        Photos
+    */
+
+	photos.forEach((photo) => {
+		photo.style.translate = `
+${currentX * 10}px
+${currentY * 10}px
+`;
+	});
+
+	requestAnimationFrame(animate);
+}
+
+animate();
+
+/*
+    Mobile floating animation
+*/
+
+if (window.innerWidth <= 700) {
+	photos.forEach((photo, index) => {
+		const x = index % 2 === 0 ? 8 : -8;
+
+		const y = index % 3 === 0 ? -10 : -6;
 
 		photo.animate(
 			[
 				{
-					transform: photo.style.transform,
+					translate: "0px 0px",
 				},
 
 				{
-					transform: `
-                ${photo.style.transform}
-                translate(
-                ${amountX}px,
-                ${amountY}px
-                )
-                `,
+					translate: `${x}px ${y}px`,
+				},
+
+				{
+					translate: "0px 0px",
 				},
 			],
 
 			{
-				duration: random(9000, 15000),
+				duration: 8500 + index * 450,
 
 				iterations: Infinity,
 
@@ -198,3 +143,20 @@ if (window.innerWidth < 800) {
 		);
 	});
 }
+
+/*
+    Reload when switching
+    between desktop and mobile
+*/
+
+let wasMobile = window.innerWidth <= 600;
+
+window.addEventListener("resize", () => {
+	const isMobile = window.innerWidth <= 600;
+
+	if (wasMobile !== isMobile) {
+		location.reload();
+	}
+
+	wasMobile = isMobile;
+});
