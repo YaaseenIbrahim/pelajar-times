@@ -1,54 +1,46 @@
-const memoryWall = document.getElementById("memory-wall");
-
 const hero = document.querySelector(".hero");
-
 const masthead = document.querySelector(".masthead");
-
+const photos = document.querySelectorAll(".memory");
+const memoryWall = document.getElementById("memory-wall");
 const memories = [
-	"pelajar background 1.jpeg",
-	"pelajar background 2.jpeg",
-	"pelajar background 3.jpeg",
-	"pelajar background 4.jpeg",
-	"pelajar background 5.jpeg",
-	"pelajar background 6.jpeg",
-	"pelajar background 7.jpeg",
-	"pelajar background 8.jpeg",
-	"pelajar background 9.jpeg",
-	"pelajar background 10.jpeg",
-	"pelajar background 11.jpeg",
-	"pelajar background 12.jpeg",
+	"memory (1).jpeg",
+	"memory (2).jpeg",
+	"memory (3).jpeg",
+	"memory (4).jpeg",
+	"memory (5).jpeg",
+	"memory (6).jpeg",
+	"memory (7).jpeg",
+	"memory (8).jpeg",
+	"memory (9).jpeg",
+	"memory (10).jpeg",
+	"memory (11).jpeg",
+	"memory (12).jpeg",
 ];
 
 memories.forEach((image) => {
 	const frame = document.createElement("div");
-
 	frame.className = "memory";
 
 	const img = document.createElement("img");
-
-	img.src = `images/${image}`;
-
+	img.src = `images/memories/${image}`;
 	img.loading = "lazy";
 
-	img.draggable = false;
-
 	frame.appendChild(img);
-
 	memoryWall.appendChild(frame);
 });
+
 /*
-    PARALLAX
+=====================================
+Mouse Tracking
+=====================================
 */
-
-const photos = document.querySelectorAll(".memory");
-
 let mouseX = 0;
 let mouseY = 0;
 
 let currentX = 0;
 let currentY = 0;
 
-document.addEventListener("mousemove", (e) => {
+window.addEventListener("mousemove", (e) => {
 	if (window.innerWidth <= 700) return;
 
 	mouseX = e.clientX / window.innerWidth - 0.5;
@@ -56,15 +48,9 @@ document.addEventListener("mousemove", (e) => {
 });
 
 /*
-    Save each photo's original rotation
-*/
-
-photos.forEach((photo) => {
-	photo.dataset.baseTransform = window.getComputedStyle(photo).transform;
-});
-
-/*
-    Main animation loop
+=====================================
+Parallax Animation
+=====================================
 */
 
 function animate() {
@@ -72,33 +58,25 @@ function animate() {
 	currentY += (mouseY - currentY) * 0.08;
 
 	/*
-        Background
-    */
+	Background
+	*/
 
 	hero.style.setProperty("--bg-x", `${currentX * 35}px`);
-
 	hero.style.setProperty("--bg-y", `${currentY * 35}px`);
 
 	/*
-        Title
-    */
+	Title
+	*/
 
-	masthead.style.transform = `
-translate(
-${currentX * -8}px,
-${currentY * -8}px
-)
-`;
+	masthead.style.transform = `translate(${currentX * -8}px,${currentY * -8}px)`;
 
-	/*
-        Photos
-    */
+	/* Card Only translate. CSS keeps all the positions and rotations. */
 
 	photos.forEach((photo) => {
 		photo.style.translate = `
-${currentX * 10}px
-${currentY * 10}px
-`;
+			${currentX * 10}px
+			${currentY * 10}px
+		`;
 	});
 
 	requestAnimationFrame(animate);
@@ -107,14 +85,14 @@ ${currentY * 10}px
 animate();
 
 /*
-    Mobile floating animation
+=====================================
+Mobile Floating
+=====================================
 */
 
 if (window.innerWidth <= 700) {
 	photos.forEach((photo, index) => {
-		const x = index % 2 === 0 ? 8 : -8;
-
-		const y = index % 3 === 0 ? -10 : -6;
+		const x = index % 2 === 0 ? 6 : -6;
 
 		photo.animate(
 			[
@@ -123,7 +101,7 @@ if (window.innerWidth <= 700) {
 				},
 
 				{
-					translate: `${x}px ${y}px`,
+					translate: `${x}px -8px`,
 				},
 
 				{
@@ -132,12 +110,8 @@ if (window.innerWidth <= 700) {
 			],
 
 			{
-				duration: 8500 + index * 450,
-
+				duration: 9000 + index * 350,
 				iterations: Infinity,
-
-				direction: "alternate",
-
 				easing: "ease-in-out",
 			},
 		);
@@ -159,4 +133,102 @@ window.addEventListener("resize", () => {
 	}
 
 	wasMobile = isMobile;
+});
+
+/*
+=====================================
+News Articles
+=====================================
+*/
+
+const news = [
+	{
+		title: "lorem ipsum blah blah",
+		date: "July 28, 2026",
+		image: "images/thumbnails/thumbnail (1).jpeg",
+		link: "article.html",
+	},
+
+	{
+		title: "this is testing a very long sentence to see what it would do to the card and if it would break the layout or not",
+		date: "July 23, 2026",
+		image: "images/thumbnails/thumbnail (2).jpeg",
+		link: "article.html",
+	},
+
+	{
+		title: "short",
+		date: "July 17, 2026",
+		image: "images/thumbnails/thumbnail (3).jpeg",
+		link: "article.html",
+	},
+
+	{
+		title: "lorem",
+		date: "July 10, 2026",
+		image: "images/thumbnails/thumbnail (4).jpeg",
+		link: "article.html",
+	},
+
+	{
+		title: "goku eats pokemon in library",
+		date: "July 2, 2026",
+		image: "images/thumbnails/thumbnail (5).jpeg",
+		link: "article.html",
+	},
+
+	{
+		title: "Breaking: laisa Finally Pays Back RM5",
+		date: "June 18, 2026",
+		image: "images/thumbnails/thumbnail (6).jpeg",
+		link: "article.html",
+	},
+	{
+		title: "Breaking: laisa Finally Pays Back RM5",
+		date: "June 18, 2026",
+		image: "images/thumbnails/thumbnail (6).jpeg",
+		link: "article.html",
+	},
+	{
+		title: "Breaking: laisa Finally Pays Back RM5",
+		date: "June 18, 2026",
+		image: "images/thumbnails/thumbnail (6).jpeg",
+		link: "article.html",
+	},
+	{
+		title: "Breaking: laisa Finally Pays Back RM5",
+		date: "June 18, 2026",
+		image: "images/thumbnails/thumbnail (6).jpeg",
+		link: "article.html",
+	},
+];
+
+const newsGrid = document.getElementById("news-grid");
+
+news.forEach((article) => {
+	const card = document.createElement("article");
+
+	card.className = "news-card";
+
+	card.innerHTML = `
+		<div class="news-thumb">
+			<img src="${article.image}" alt="${article.title}">
+		</div>
+
+		<div class="news-content">
+			<div class="news-date">
+				${article.date}
+			</div>
+
+			<h3 class="news-title-card">
+				${article.title}
+			</h3>
+		</div>
+	`;
+
+	card.addEventListener("click", () => {
+		window.location.href = article.link;
+	});
+
+	newsGrid.appendChild(card);
 });

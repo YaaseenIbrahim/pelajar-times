@@ -1,0 +1,288 @@
+/* =====================================
+TOP BAR
+===================================== */
+
+.topbar {
+	width: min(1200px, 92%);
+	margin: 0 auto;
+	padding: 30px 0;
+
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.back-button {
+	text-decoration: none;
+	color: var(--accent);
+	font-weight: 700;
+	font-size: 0.95rem;
+	transition: 0.25s;
+}
+
+.back-button:hover {
+	color: white;
+}
+
+.logo {
+	font-family: "Manrope", sans-serif;
+	font-size: 1.2rem;
+	font-weight: 800;
+	letter-spacing: 3px;
+	color: var(--heading);
+}
+
+/* =====================================
+ARTICLE
+===================================== */
+
+.article {
+	width: min(900px, 92%);
+	margin: 0 auto 120px;
+}
+
+/* =====================================
+HERO IMAGE
+===================================== */
+
+.hero-image {
+	margin-top: 15px;
+	border-radius: 18px;
+	overflow: hidden;
+	box-shadow: var(--shadow);
+}
+
+.hero-image img {
+	width: 100%;
+	height: 480px;
+	object-fit: cover;
+	display: block;
+}
+
+/* =====================================
+HEADER
+===================================== */
+
+.article-header {
+	margin: 50px 0;
+}
+
+.article-header h1 {
+	font-family: "Manrope", sans-serif;
+	font-size: clamp(2.5rem, 5vw, 4.5rem);
+	line-height: 1.1;
+	font-weight: 800;
+	color: var(--heading);
+	margin-bottom: 18px;
+}
+
+.meta {
+	color: var(--accent);
+	font-size: 0.95rem;
+	font-weight: 700;
+	letter-spacing: 1px;
+}
+
+/* =====================================
+BODY
+===================================== */
+
+.article-body {
+	font-size: 1.35rem;
+	line-height: 2;
+	color: var(--text);
+}
+
+.article-body p {
+	margin-bottom: 34px;
+}
+
+.article-body p:first-of-type::first-letter {
+	font-size: 4.8rem;
+	font-weight: 800;
+	float: left;
+	line-height: 0.82;
+	padding-right: 12px;
+	color: white;
+}
+
+/* =====================================
+QUOTE
+===================================== */
+
+blockquote {
+	margin: 70px 0;
+	padding-left: 28px;
+	border-left: 4px solid var(--accent);
+
+	font-size: 1.7rem;
+	font-weight: 600;
+	font-style: italic;
+	line-height: 1.6;
+	color: white;
+}
+
+/* =====================================
+MEDIA
+===================================== */
+
+.media-divider {
+	margin: 70px 0 45px;
+	border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.media-gallery {
+	margin-bottom: 30px;
+}
+
+.media-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+	gap: 18px;
+}
+
+.media-grid img,
+.media-grid video,
+.media-grid iframe {
+	width: 100%;
+	display: block;
+	border-radius: 14px;
+	background: rgba(255, 255, 255, 0.05);
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.media-grid img {
+	aspect-ratio: 4 / 3;
+	object-fit: cover;
+	cursor: pointer;
+	transition:
+		transform 0.25s ease,
+		box-shadow 0.25s ease;
+}
+
+.media-grid img:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+.media-grid video {
+	aspect-ratio: 16 / 9;
+	object-fit: cover;
+}
+
+.media-grid iframe {
+	aspect-ratio: 16 / 9;
+	border: none;
+}
+
+/* =====================================
+NAVIGATION
+===================================== */
+
+.article-navigation {
+	margin-top: 80px;
+	padding-top: 35px;
+	border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 20px;
+}
+
+.article-navigation a {
+	text-decoration: none;
+	color: var(--accent);
+	font-weight: 700;
+	transition: 0.25s;
+}
+
+.article-navigation a:hover {
+	color: white;
+}
+
+/* =====================================
+RESPONSIVE
+===================================== */
+
+@media (max-width: 900px) {
+
+	.hero-image img {
+		height: 360px;
+	}
+
+	.article-header h1 {
+		font-size: 3rem;
+	}
+
+	.article-body {
+		font-size: 1.08rem;
+	}
+
+	.article-body p:first-of-type::first-letter {
+		font-size: 4.2rem;
+	}
+
+	blockquote {
+		font-size: 1.45rem;
+	}
+
+	.media-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 600px) {
+
+	.topbar {
+		flex-direction: column;
+		gap: 18px;
+	}
+
+	.article {
+		width: 92%;
+	}
+
+	.hero-image img {
+		height: 240px;
+	}
+
+	.article-header {
+		margin: 35px 0;
+	}
+
+	.article-header h1 {
+		font-size: 2.2rem;
+		line-height: 1.2;
+	}
+
+	.meta {
+		font-size: 0.85rem;
+	}
+
+	.article-body {
+		font-size: 1rem;
+		line-height: 1.85;
+	}
+
+	.article-body p:first-of-type::first-letter {
+		font-size: 3.8rem;
+	}
+
+	blockquote {
+		font-size: 1.2rem;
+		margin: 50px 0;
+		padding-left: 18px;
+	}
+
+	.media-grid {
+		grid-template-columns: 1fr;
+		gap: 16px;
+	}
+
+	.article-navigation {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 14px;
+	}
+}

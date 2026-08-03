@@ -18,14 +18,14 @@
 :root {
 
     --body-background: #455464;
-    --body-gradient-top: #56697b;
-    --body-gradient-bottom: #394754;
+    --body-gradient-top: #394754;
+    --body-gradient-bottom: #455464;
 
     --surface: #667b8e;
     --surface-hover: #72889c;
 
-    --quote-background: #6b8092;
-    --quote-background-hover: #7890a3;
+    --quote-background: #40596f;
+    --quote-background-hover: #597d9a;
 
     --text-color: #edf3f8;
     --text-muted: #d1dde7;
