@@ -13,7 +13,6 @@ TOP BAR
 }
 
 .back-button {
-	text-decoration: none;
 	color: var(--accent);
 	font-weight: 700;
 	font-size: 0.95rem;
@@ -25,7 +24,7 @@ TOP BAR
 }
 
 .logo {
-	font-family: "Manrope", sans-serif;
+	font-family: "manrope", sans-serif;
 	font-size: 1.2rem;
 	font-weight: 800;
 	letter-spacing: 3px;

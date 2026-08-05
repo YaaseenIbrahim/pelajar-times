@@ -232,3 +232,14 @@ news.forEach((article) => {
 
 	newsGrid.appendChild(card);
 });
+
+const dailyQuote = {
+	text: "I'm not late. Everyone else just came early.",
+	author: "Laisa",
+};
+
+document.getElementById("daily-quote-preview").textContent =
+	`"${dailyQuote.text}"`;
+
+document.getElementById("daily-quote-author").textContent =
+	`— ${dailyQuote.author}`;

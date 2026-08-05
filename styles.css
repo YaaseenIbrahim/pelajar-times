@@ -34,3 +34,7 @@ body {
 	color: var(--text);
 	overflow-x: hidden;
 }
+
+a{
+	text-decoration: none;
+}

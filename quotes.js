@@ -1,65 +1,10 @@
-let semesters = [];
-let allQuotes = [];
-
-let currentPage = 0;
-const quotesPerPage = 5;
-
-async function loadQuotes() {
-	try {
-		const res = await fetch("quotes.json");
-
-		semesters = await res.json();
-
-		allQuotes = semesters.flatMap((semester) => semester.quotes);
-
-		renderQuotes();
-		showDailyQuote();
-	} catch (err) {
-		console.error("Failed to load quotes:", err);
-	}
-}
-
-function formatQuote(text) {
-	return text
-		.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-		.replace(/\*(.*?)\*/g, "<i>$1</i>");
-}
-
-function showDailyQuote() {
-	if (allQuotes.length === 0) return;
-
-	const random = allQuotes[Math.floor(Math.random() * allQuotes.length)];
-
-	const quoteEl = document.getElementById("daily-quote");
-
-	const authorEl = document.getElementById("daily-author");
-
-	quoteEl.innerHTML = `"${formatQuote(random.text)}"`;
-
-	if (random.action) {
-		quoteEl.innerHTML += `
-			<br>
-			<span style="margin-top: 0.5rem;">
-				${formatQuote(random.action)}
-			</span>
-		`;
-	}
-
-	if (random.author) {
-		authorEl.textContent = random.dhivehi
-			? `${random.author} —`
-			: `— ${random.author}`;
-	} else {
-		authorEl.textContent = "";
-	}
-}
 
 function createCard(quote) {
 	const card = document.createElement("div");
 
 	card.className = "card";
 
-	if (quote.dhivehi === true) {
+	if (quote.dhivehi) {
 		card.classList.add("dhivehi");
 	}
 
@@ -67,7 +12,7 @@ function createCard(quote) {
 
 	if (quote.action) {
 		actionHTML = `
-			<p style="margin-top: -1rem;">
+			<p style="margin-top:-1rem;">
 				${formatQuote(quote.action)}
 			</p>
 		`;
@@ -98,21 +43,19 @@ function createCard(quote) {
 			`;
 		}
 	} else {
-		const quoteText = `"${formatQuote(quote.text)}"`;
-
-		const authorText = quote.dhivehi
+		const author = quote.dhivehi
 			? `${quote.author} —`
 			: `— ${quote.author}`;
 
 		card.innerHTML = `
 			<p class="quote">
-				${quoteText}
+				"${formatQuote(quote.text)}"
 			</p>
 
 			${actionHTML}
 
 			<p class="author">
-				${authorText}
+				${author}
 			</p>
 		`;
 	}
@@ -123,25 +66,19 @@ function createCard(quote) {
 function renderQuotes(filter = "") {
 	const container = document.getElementById("quote-sections");
 
+	if (!container) return;
+
 	container.innerHTML = "";
 
 	semesters.forEach((semester) => {
-		const filteredQuotes = semester.quotes.filter((q) => {
-			const text = q.text.toLowerCase();
-
-			const author = (q.author || "").toLowerCase();
-
-			const action = (q.action || "").toLowerCase();
-
-			const conversation = (q.conversation || "").toLowerCase();
-
+		const filteredQuotes = semester.quotes.filter((quote) => {
 			const search = filter.toLowerCase();
 
 			return (
-				text.includes(search) ||
-				author.includes(search) ||
-				action.includes(search) ||
-				conversation.includes(search)
+				quote.text.toLowerCase().includes(search) ||
+				(quote.author || "").toLowerCase().includes(search) ||
+				(quote.action || "").toLowerCase().includes(search) ||
+				(quote.conversation || "").toLowerCase().includes(search)
 			);
 		});
 
@@ -152,10 +89,7 @@ function renderQuotes(filter = "") {
 		section.className = "semester";
 
 		section.innerHTML = `
-			<h2>
-				${semester.title}
-			</h2>
-
+			<h2>${semester.title}</h2>
 			<div class="grid"></div>
 		`;
 
@@ -169,8 +103,17 @@ function renderQuotes(filter = "") {
 	});
 }
 
-document.getElementById("search").addEventListener("input", (e) => {
-	renderQuotes(e.target.value);
-});
+window.quotesReady.then((data) => {
+	semesters = data.semesters;
+	allQuotes = data.allQuotes;
 
-loadQuotes();
+	renderQuotes();
+
+	const search = document.getElementById("search");
+
+	if (search) {
+		search.addEventListener("input", (e) => {
+			renderQuotes(e.target.value);
+		});
+	}
+});

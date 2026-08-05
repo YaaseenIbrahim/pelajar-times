@@ -208,13 +208,14 @@
 	font-size: clamp(5rem, 16vw, 12rem);
 	line-height: 0.78;
 	font-weight: 900;
-	letter-spacing: -10px;
 	color: var(--heading);
+	letter-spacing: -10px;
 }
 
 .masthead h1 span {
 	display: block;
 	letter-spacing: -8px;
+
 }
 
 .masthead p {
@@ -489,3 +490,4 @@
 		transform: rotate(-16deg);
 	}
 }
+
