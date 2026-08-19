@@ -67,7 +67,6 @@ HEADER
 }
 
 .article-header h1 {
-	font-family: "Manrope", sans-serif;
 	font-size: clamp(2.5rem, 5vw, 4.5rem);
 	line-height: 1.1;
 	font-weight: 800;
@@ -145,23 +144,6 @@ MEDIA
 .media-grid iframe {
 	width: 100%;
 	display: block;
-	border-radius: 14px;
-	background: rgba(255, 255, 255, 0.05);
-	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-}
-
-.media-grid img {
-	aspect-ratio: 4 / 3;
-	object-fit: cover;
-	cursor: pointer;
-	transition:
-		transform 0.25s ease,
-		box-shadow 0.25s ease;
-}
-
-.media-grid img:hover {
-	transform: translateY(-3px);
-	box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
 }
 
 .media-grid video {

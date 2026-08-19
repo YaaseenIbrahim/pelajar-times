@@ -1,0 +1,9 @@
+{
+  "name": "pelajar-times",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "serve": "firebase emulators:start --only hosting",
+    "deploy": "firebase deploy --only hosting"
+  }
+}
