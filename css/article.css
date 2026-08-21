@@ -146,6 +146,10 @@ MEDIA
 	display: block;
 }
 
+.media-grid img {
+	cursor: zoom-in;
+}
+
 .media-grid video {
 	aspect-ratio: 16 / 9;
 	object-fit: cover;
@@ -187,7 +191,6 @@ RESPONSIVE
 ===================================== */
 
 @media (max-width: 900px) {
-
 	.hero-image img {
 		height: 360px;
 	}
@@ -214,7 +217,6 @@ RESPONSIVE
 }
 
 @media (max-width: 600px) {
-
 	.topbar {
 		flex-direction: column;
 		gap: 18px;
@@ -266,4 +268,243 @@ RESPONSIVE
 		align-items: flex-start;
 		gap: 14px;
 	}
+}
+/* =====================================
+   DHIVEHI / RTL ARTICLE CONTENT
+===================================== */
+
+body.dhivehi .article-header,
+body.dhivehi .article-body {
+	direction: rtl;
+	text-align: right;
+}
+
+body.dhivehi .article-body p,
+body.dhivehi .article-header h1 {
+	direction: rtl;
+	text-align: right;
+}
+
+/* Floating first letter belongs on the right in Dhivehi */
+body.dhivehi .article-body p:first-of-type::first-letter {
+	float: right;
+	padding-right: 0;
+	padding-left: 12px;
+}
+
+/* Dhivehi blockquotes */
+body.dhivehi blockquote {
+	direction: rtl;
+	text-align: right;
+	border-left: none;
+	border-right: 4px solid var(--accent);
+	padding-left: 0;
+	padding-right: 28px;
+}
+
+/* =====================================
+   ARTICLE LOADING STATE
+===================================== */
+
+.article-loading .hero-image {
+	background: #1a1a1a;
+	overflow: hidden;
+}
+
+.article-loading .hero-image::before {
+	content: "";
+	display: block;
+	width: 100%;
+	height: 480px;
+	background: linear-gradient(90deg, #1a1a1a 25%, #242424 50%, #1a1a1a 75%);
+	background-size: 200% 100%;
+	animation: articleLoading 1.5s infinite;
+}
+
+.article-loading .hero-image img {
+	display: none;
+}
+
+.article-loading .article-header h1 {
+	width: 75%;
+	height: 70px;
+	border-radius: 8px;
+	background: #1a1a1a;
+	color: transparent;
+	animation: articleLoading 1.5s infinite;
+}
+
+.article-loading .meta {
+	width: 180px;
+	height: 18px;
+	border-radius: 5px;
+	background: #1a1a1a;
+	color: transparent;
+	animation: articleLoading 1.5s infinite;
+}
+
+.article-loading .article-body {
+	visibility: hidden;
+}
+
+@keyframes articleLoading {
+	0% {
+		background-position: 200% 0;
+	}
+
+	100% {
+		background-position: -200% 0;
+	}
+}
+
+/* Remove loading state once article is ready */
+
+.article:not(.article-loading) .hero-image::before {
+	display: none;
+}
+
+@media (max-width: 900px) {
+	.article-loading .hero-image::before {
+		height: 360px;
+	}
+}
+
+@media (max-width: 600px) {
+	.article-loading .hero-image::before {
+		height: 240px;
+	}
+
+	.article-loading .article-header h1 {
+		height: 50px;
+	}
+}
+/* =====================================
+   IMAGE LIGHTBOX
+===================================== */
+
+.image-lightbox {
+	position: fixed;
+	inset: 0;
+	z-index: 9999;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	padding: 40px;
+
+	background: rgba(0, 0, 0, 0.92);
+
+	cursor: zoom-out;
+}
+
+.image-lightbox.hidden {
+	display: none;
+}
+
+.image-lightbox img {
+	max-width: 95vw;
+	max-height: 90vh;
+
+	width: auto;
+	height: auto;
+
+	object-fit: contain;
+
+	border-radius: 8px;
+
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+
+	cursor: default;
+}
+
+.lightbox-close {
+	position: absolute;
+	top: 20px;
+	right: 25px;
+
+	width: 48px;
+	height: 48px;
+
+	border: none;
+	border-radius: 50%;
+
+	background: rgba(255, 255, 255, 0.12);
+	color: white;
+
+	font-size: 32px;
+	line-height: 1;
+
+	cursor: pointer;
+
+	z-index: 2;
+
+	transition:
+		background 0.2s ease,
+		transform 0.2s ease;
+}
+
+.lightbox-close:hover {
+	background: rgba(255, 255, 255, 0.25);
+	transform: scale(1.05);
+}
+
+/* Prevent page scrolling while lightbox is open */
+
+body.lightbox-open {
+	overflow: hidden;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+	.image-lightbox {
+		padding: 15px;
+	}
+
+	.image-lightbox img {
+		max-width: 100vw;
+		max-height: 85vh;
+		border-radius: 4px;
+	}
+
+	.lightbox-close {
+		top: 12px;
+		right: 12px;
+
+		width: 42px;
+		height: 42px;
+
+		font-size: 28px;
+	}
+}
+/* =====================================
+   MEDIA SECTIONS
+===================================== */
+
+.media-section {
+	margin-top: 45px;
+	margin-bottom: 45px;
+}
+
+.media-section video {
+	width: 100%;
+	display: block;
+	border-radius: 12px;
+	background: #000;
+}
+
+.youtube-container {
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	overflow: hidden;
+	border-radius: 12px;
+	background: #000;
+}
+
+.youtube-container iframe {
+	width: 100%;
+	height: 100%;
+	display: block;
+	border: none;
 }

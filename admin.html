@@ -67,6 +67,7 @@
 						</select>
 					</label>
 
+					<!-- MAIN IMAGE -->
 					<label>
 						Main Image
 						<input
@@ -78,11 +79,13 @@
 
 					<p id="main-image-status" class="upload-status"></p>
 
+					<!-- ARTICLE DATE -->
 					<label>
 						Article Date
 						<input type="date" id="article-date-input" />
 					</label>
 
+					<!-- MANUAL DATE -->
 					<label>
 						Manual Date
 						<input
@@ -92,6 +95,7 @@
 						/>
 					</label>
 
+					<!-- ARTICLE BODY -->
 					<label>
 						Article Body
 						<textarea
@@ -101,18 +105,79 @@
 						></textarea>
 					</label>
 
-					<label>
-						Gallery Images
+					<!-- GALLERY IMAGES -->
+					<div class="gallery-editor">
+						<label>Gallery Images</label>
+
+						<div id="gallery-preview" class="gallery-preview"></div>
+
+						<button
+							type="button"
+							id="add-gallery-images"
+							class="secondary-button"
+						>
+							+ Add Images
+						</button>
+
 						<input
 							type="file"
 							id="article-gallery-input"
 							accept="image/*"
 							multiple
+							hidden
 						/>
-					</label>
 
-					<p id="gallery-image-status" class="upload-status"></p>
+						<p id="gallery-image-status" class="upload-status"></p>
+					</div>
 
+					<!-- VIDEO GALLERY -->
+					<div class="video-gallery-editor">
+						<label>Video Clips</label>
+
+						<div id="video-preview" class="video-preview"></div>
+
+						<button
+							type="button"
+							id="add-gallery-videos"
+							class="secondary-button"
+						>
+							+ Add Videos
+						</button>
+
+						<input
+							type="file"
+							id="article-video-input"
+							accept="video/*"
+							multiple
+							hidden
+						/>
+
+						<p id="video-status" class="upload-status"></p>
+
+						<p class="upload-help">
+							Upload short video clips. They will be stored on
+							Cloudinary and displayed in the article gallery.
+						</p>
+					</div>
+
+					<!-- YOUTUBE -->
+					<div class="youtube-editor">
+						<label>
+							YouTube Video
+							<input
+								type="url"
+								id="article-youtube-input"
+								placeholder="https://www.youtube.com/watch?v=..."
+							/>
+						</label>
+
+						<p class="upload-help">
+							Optional. Paste a YouTube video URL to embed it in
+							the article.
+						</p>
+					</div>
+
+					<!-- BUTTONS -->
 					<div class="editor-buttons">
 						<button id="save-article" class="primary-button">
 							Save Article

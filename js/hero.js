@@ -40,11 +40,12 @@ function createMemoryWall() {
 }
 
 createMemoryWall();
+
 function refreshMemoryPhotos() {
 	photos = Array.from(document.querySelectorAll(".memory"));
 }
 
-window.refreshMemoryPhotos = refreshMemoryPhotos;
+refreshMemoryPhotos();
 
 /*
 =====================================
@@ -76,9 +77,9 @@ function animate() {
 
 	hero.style.setProperty("--bg-x", `${currentX * 35}px`);
 	hero.style.setProperty("--bg-y", `${currentY * 35}px`);
-	masthead.style.transform = `translate(${currentX * -8}px,${currentY * -8}px)`;
 
-	refreshMemoryPhotos();
+	masthead.style.transform = `translate(${currentX * -8}px, ${currentY * -8}px)`;
+
 	photos.forEach((photo) => {
 		photo.style.translate = `${currentX * 10}px ${currentY * 10}px`;
 	});
