@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-		<title>Article Title | PELAJAR TIMES</title>
+		<title>Article Title</title>
 
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,122 +14,46 @@
 			rel="stylesheet"
 		/>
 
-		<link rel="stylesheet" href="article.css" />
+		<link rel="stylesheet" href="css/article.css" />
 		<link rel="stylesheet" href="styles.css" />
-
 	</head>
 
 	<body>
 		<header class="topbar">
-			<a href="../index.html" class="back-button"> ← Back </a>
-
-			<a href="../index.html" class="logo">PELAJAR TIMES</a>
+			<a href="index.html" class="back-button"> ← Back </a>
+			<a href="index.html" class="logo">PELAJAR TIMES</a>
 		</header>
 
-		<main class="article">
-			<!-- Hero Image -->
+		<main class="article article-loading">
+			<section class="article-hero" aria-labelledby="article-title">
+				<div class="hero-image">
+					<img id="article-image" src="" alt="" />
+				</div>
 
-			<div class="hero-image">
-				<img src="images/thumbnails/thumbnail (4).jpeg" alt="" />
-			</div>
+				<div class="article-header">
+					<h1 id="article-title"></h1>
+					<div class="meta" id="article-date"></div>
+				</div>
+			</section>
 
-			<!-- Article Header -->
+			<article class="article-body" id="article-body"></article>
 
-			<div class="article-header">
-				<h1>
-					Gang meets up for board game session
-				</h1>
+			<section class="media-gallery" id="article-media"></section>
 
-				<div class="meta">July 28, 2026</div>
-			</div>
-
-			<!-- Story -->
-
-			<article class="article-body">
-				<p class="lead">
-					The day was a cold winter day, affans house seemed the perfect place to weed out some gold diggers.
-				</p>
-
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					Donec faucibus lectus vitae turpis volutpat, nec pretium
-					mauris posuere. Aliquam erat volutpat. Integer volutpat eros
-					sed magna pellentesque, sed malesuada risus commodo.
-				</p>
-
-				<p>
-					Curabitur sit amet turpis sed augue viverra hendrerit.
-					Pellentesque luctus nisl sed mauris consectetur, non luctus
-					nulla finibus. Quisque bibendum est quis sapien cursus
-					tristique.
-				</p>
-
-				<p>
-					Sed vitae ligula et augue pulvinar fermentum. Vestibulum
-					ante ipsum primis in faucibus orci luctus et ultrices
-					posuere cubilia curae. Donec sit amet nisl sed elit
-					pellentesque facilisis.
-				</p>
-
-				<blockquote>
-					"You knew i was lieing but beleived me anyway"
-				</blockquote>
-
-				<p>
-					Integer feugiat, justo vel egestas tincidunt, lacus erat
-					cursus ligula, vitae pellentesque lectus augue non erat.
-					Vestibulum dictum porta ipsum sed tincidunt.
-				</p>
-			</article>
-
-			<!-- Memory Archive -->
-		<!-- Media -->
-
-		<div class="media-divider"></div>
-
-		<section class="media-gallery">
-
-			<div class="media-grid">
-
-				<img src="images/articles/article1/1.jpeg" alt="">
-				<img src="images/articles/article1/2.jpeg" alt="">
-				<img src="images/articles/article1/3.jpeg" alt="">
-				<img src="images/articles/article1/4.jpeg" alt="">
-				<img src="images/articles/article1/5.jpeg" alt="">
-				<img src="images/articles/article1/6.jpeg" alt="">
-
-				<video controls>
-					<source src="videos/article1/video1.mp4" type="video/mp4">
-				</video>
-
-				<img src="images/articles/article1/7.jpeg" alt="">
-				<img src="images/articles/article1/8.jpeg" alt="">
-				<img src="images/articles/article1/9.jpeg" alt="">
-				<img src="images/articles/article1/10.jpeg" alt="">
-
-				<iframe
-					src="https://www.youtube.com/embed/VIDEO_ID"
-					title="YouTube video"
-					allowfullscreen>
-				</iframe>
-
-			</div>
-
-		</section>
-
-		<!-- Navigation -->
-
-		<div class="article-navigation">
-
-			<a href="previous.html">
-				← Previous Article
-			</a>
-
-			<a href="next.html">
-				Next Article →
-			</a>
-
-		</div>
+			<nav class="article-navigation" id="article-navigation"></nav>
 		</main>
+		<!-- IMAGE LIGHTBOX -->
+		<div id="image-lightbox" class="image-lightbox hidden">
+			<button
+				id="lightbox-close"
+				class="lightbox-close"
+				aria-label="Close image"
+			>
+				X
+			</button>
+
+			<img id="lightbox-image" src="" alt="" />
+		</div>
+		<script type="module" src="js/article.js"></script>
 	</body>
 </html>

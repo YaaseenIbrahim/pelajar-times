@@ -1,0 +1,351 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: Arial, sans-serif;
+	background: #f1f1f1;
+	color: #222;
+}
+
+.admin-header {
+	background: #111;
+	color: white;
+	padding: 18px 30px;
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.admin-logo {
+	color: white;
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 1.2rem;
+}
+
+#user-area {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+}
+
+#sign-out {
+	border: none;
+	padding: 8px 14px;
+	cursor: pointer;
+	border-radius: 6px;
+}
+
+.admin-container {
+	max-width: 1000px;
+	margin: 40px auto;
+	padding: 0 20px;
+}
+
+.admin-section {
+	background: white;
+	padding: 30px;
+	border-radius: 12px;
+	box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.hidden {
+	display: none !important;
+}
+
+.admin-section h1 {
+	margin-bottom: 10px;
+}
+
+.admin-section h2 {
+	margin-bottom: 20px;
+}
+
+.primary-button,
+.secondary-button {
+	padding: 11px 18px;
+	border: none;
+	border-radius: 7px;
+	cursor: pointer;
+	font-size: 15px;
+}
+
+.primary-button {
+	background: #111;
+	color: white;
+}
+
+.secondary-button {
+	background: #ddd;
+	color: #222;
+}
+
+.primary-button:hover {
+	opacity: 0.8;
+}
+
+.error {
+	color: #c00;
+	margin-top: 15px;
+}
+
+.dashboard-heading {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 30px;
+}
+
+.editor {
+	border-top: 1px solid #ddd;
+	padding-top: 30px;
+	margin-bottom: 40px;
+}
+
+.editor label {
+	display: block;
+	margin-bottom: 20px;
+	font-weight: bold;
+}
+
+.editor input[type="text"],
+.editor input[type="url"],
+.editor input[type="date"],
+.editor select,
+.editor textarea {
+	display: block;
+	width: 100%;
+	margin-top: 7px;
+	padding: 12px;
+	border: 1px solid #ccc;
+	border-radius: 6px;
+	font: inherit;
+}
+
+.editor textarea {
+	resize: vertical;
+}
+
+.checkbox-label {
+	display: flex !important;
+	align-items: center;
+	gap: 10px;
+}
+
+.checkbox-label input {
+	width: auto !important;
+}
+
+.editor-buttons {
+	display: flex;
+	gap: 10px;
+}
+
+.articles-section {
+	border-top: 1px solid #ddd;
+	padding-top: 30px;
+}
+
+.article-admin-card {
+	border: 1px solid #ddd;
+	padding: 20px;
+	margin-bottom: 15px;
+	border-radius: 8px;
+}
+
+.article-admin-card h3 {
+	margin-bottom: 8px;
+}
+
+.article-meta {
+	color: #777;
+	font-size: 14px;
+	margin-bottom: 15px;
+}
+
+.article-actions {
+	display: flex;
+	gap: 10px;
+}
+
+.article-actions button {
+	padding: 7px 12px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.edit-button {
+	background: #ddd;
+}
+
+.delete-button {
+	background: #c62828;
+	color: white;
+}
+.upload-status {
+	margin-top: -12px;
+	margin-bottom: 20px;
+	font-size: 14px;
+	color: #666;
+}
+@media (max-width: 700px) {
+	.admin-header {
+		padding: 15px;
+		flex-direction: column;
+		gap: 15px;
+	}
+
+	.dashboard-heading {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 15px;
+	}
+
+	.admin-section {
+		padding: 20px;
+	}
+}
+
+/* ==========================================
+   GALLERY EDITOR
+========================================== */
+
+.gallery-editor {
+	margin-bottom: 20px;
+}
+
+.gallery-editor > label {
+	margin-bottom: 10px;
+}
+
+.gallery-preview {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+	gap: 14px;
+	margin: 12px 0 16px;
+}
+
+.gallery-preview-item {
+	position: relative;
+	aspect-ratio: 1 / 1;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	overflow: hidden;
+	background: #eee;
+}
+
+.gallery-preview-item img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.gallery-remove-button {
+	position: absolute;
+	top: 6px;
+	right: 6px;
+
+	width: 28px;
+	height: 28px;
+
+	border: none;
+	border-radius: 50%;
+
+	background: rgba(0, 0, 0, 0.75);
+	color: white;
+
+	font-size: 20px;
+	line-height: 28px;
+
+	cursor: pointer;
+}
+
+.gallery-remove-button:hover {
+	background: #c62828;
+}
+
+.gallery-empty {
+	color: #777;
+	font-size: 14px;
+	padding: 10px 0;
+}
+/* ==========================================
+   YOUTUBE EDITOR
+========================================== */
+
+.youtube-editor {
+	margin-bottom: 25px;
+}
+
+/* ==========================================
+   VIDEO GALLERY EDITOR
+========================================== */
+
+.video-gallery-editor {
+	margin-bottom: 25px;
+}
+
+.upload-help {
+	margin-top: -12px;
+	margin-bottom: 20px;
+	font-size: 14px;
+	color: #777;
+}
+
+.video-preview {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+	gap: 14px;
+	margin: 12px 0 16px;
+}
+
+.video-preview-item {
+	position: relative;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	overflow: hidden;
+	background: #111;
+}
+
+.video-preview-item video {
+	display: block;
+	width: 100%;
+	height: 180px;
+	object-fit: cover;
+}
+
+.video-remove-button {
+	position: absolute;
+	top: 6px;
+	right: 6px;
+
+	width: 28px;
+	height: 28px;
+
+	border: none;
+	border-radius: 50%;
+
+	background: rgba(0, 0, 0, 0.75);
+	color: white;
+
+	font-size: 20px;
+	line-height: 28px;
+
+	cursor: pointer;
+}
+
+.video-remove-button:hover {
+	background: #c62828;
+}
+
+.video-empty {
+	color: #777;
+	font-size: 14px;
+	padding: 10px 0;
+}

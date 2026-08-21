@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
+
 @font-face {
-	font-family: "manrope";
-	src: url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap");
+	font-family: "rasmee";
+	src: url(fonts/rasmee.ttf) format("truetype");
 }
 :root {
 	--background: #455464;
@@ -25,7 +26,7 @@ html {
 }
 
 body {
-	font-family: "manrope", Arial, Helvetica, sans-serif;
+	font-family: "manrope", "rasmee", Arial, Helvetica, sans-serif;
 	background: linear-gradient(
 		180deg,
 		var(--background),

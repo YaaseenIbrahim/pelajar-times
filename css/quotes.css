@@ -1,13 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
 
 @font-face {
-	font-family: "manrope";
-	src: url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap");
-}
-
-@font-face {
 	font-family: "rasmee";
-	src: url(rasmee.ttf) format("truetype");
+	src: url(fonts/rasmee.ttf) format("truetype");src: url("../fonts/rasmee.ttf") format("truetype");
 }
 
 * {
@@ -67,7 +62,7 @@ body {
 
 	color: var(--text-color);
 
-	font-family: "manrope", sans-serif;
+	font-family: "manrope", "rasmee", sans-serif;
 
 	padding: 1.5rem;
 }
@@ -169,7 +164,6 @@ body {
 
 .card {
 	background: var(--quote-background);
-	font-family: "manrope", sans-serif;
 
 	border: 1px solid var(--border-color);
 

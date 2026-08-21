@@ -11,7 +11,7 @@
 .background-photo {
 	position: absolute;
 	inset: -60px;
-	background-image: url("images/pelajar background 1.jpeg");
+	background-image: url("../images/pelajar background 1.jpeg");
 	background-size: cover;
 	background-position: center;
 	transform: translate(var(--bg-x, 0), var(--bg-y, 0)) scale(1.15);
