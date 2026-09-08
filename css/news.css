@@ -377,3 +377,8 @@ QUOTE OF THE DAY
 		padding: 0 12px;
 	}
 }
+
+.news-date.manual-date {
+    direction: rtl;
+    text-align: right;
+}

@@ -96,7 +96,6 @@ async function loadArticle() {
 		) {
 			renderMedia(article, mediaEl);
 		}
-		
 	} catch (error) {
 		console.error("Failed to load article from Firestore:", error);
 		renderMissingArticle("Unable to load article. Please try again later.");
@@ -114,7 +113,7 @@ function optimizeCloudinaryImage(url, width = 1600) {
 // ==========================================
 
 function formatDate(date, isDhivehi) {
-	return new Intl.DateTimeFormat(isDhivehi ? "dv-MV" : "en-US", {
+	return new Intl.DateTimeFormat(isDhivehi ? "dv-MV" : "en-GB", {
 		month: "long",
 		day: "numeric",
 		year: "numeric",
@@ -154,7 +153,7 @@ function closeLightbox() {
 	lightboxImage.alt = "";
 }
 // ==========================================
-// ARTICLE BODY
+// ARTICLE BODY - MARKDOWN
 // ==========================================
 
 function renderBody(body, container) {
@@ -163,7 +162,17 @@ function renderBody(body, container) {
 		return;
 	}
 
-	// Array of content blocks
+	// Convert Markdown to HTML, then sanitize it
+	// so articles cannot inject unsafe HTML/JavaScript.
+	if (typeof body === "string") {
+		const html = marked.parse(body);
+
+		container.innerHTML = DOMPurify.sanitize(html);
+		return;
+	}
+
+	// Keep compatibility with any old articles
+	// that may still use the previous array format.
 	if (Array.isArray(body)) {
 		container.innerHTML = body
 			.map((block) => {
@@ -178,10 +187,8 @@ function renderBody(body, container) {
 		return;
 	}
 
-	// Simple string
-	container.innerHTML = `<p>${escapeHTML(body)}</p>`;
+	container.innerHTML = "";
 }
-
 // ==========================================
 // MEDIA
 // ==========================================

@@ -58,7 +58,6 @@ async function loadHomeData(page = 1) {
 		// ==========================================
 		// LATER PAGES
 		// ==========================================
-
 		else {
 			const previousPageCursor = pageCursors.get(page - 1);
 
@@ -86,10 +85,7 @@ async function loadHomeData(page = 1) {
 		// Save the last document from this page.
 		// It becomes the cursor for the next page.
 		if (snapshot.docs.length > 0) {
-			pageCursors.set(
-				page,
-				snapshot.docs[snapshot.docs.length - 1],
-			);
+			pageCursors.set(page, snapshot.docs[snapshot.docs.length - 1]);
 		}
 
 		currentPage = page;
@@ -97,7 +93,6 @@ async function loadHomeData(page = 1) {
 		renderNews(articles);
 
 		renderPagination(snapshot.docs.length);
-
 	} catch (error) {
 		console.error("Failed to load articles:", error);
 
@@ -126,34 +121,41 @@ function createNewsCard(article) {
 	card.dir = isDhivehi ? "rtl" : "ltr";
 
 	let dateText = "";
+	let dateIsManual = false;
 
-	if (article.date) {
+	// ==========================================
+	// MANUAL DATE
+	// ==========================================
+
+	if (article.manualDate?.trim()) {
+		dateText = article.manualDate.trim();
+		dateIsManual = true;
+	}
+
+	// ==========================================
+	// NORMAL DATE
+	// ==========================================
+	else if (article.date) {
 		const date =
 			typeof article.date.toDate === "function"
 				? article.date.toDate()
 				: new Date(article.date);
 
 		if (!isNaN(date.getTime())) {
-			dateText = new Intl.DateTimeFormat(
-				isDhivehi ? "dv-MV" : "en-US",
-				{
-					month: "long",
-					day: "numeric",
-					year: "numeric",
-				},
-			).format(date);
+			dateText = new Intl.DateTimeFormat("en-GB", {
+				day: "numeric",
+				month: "long",
+				year: "numeric",
+			}).format(date);
 		}
 	}
-
 	card.innerHTML = `
 		${
 			article.image
 				? `
 					<div class="news-thumb">
 						<img
-							src="${escapeHTML(
-								optimizeCloudinaryImage(article.image, 700),
-							)}"
+							src="${escapeHTML(optimizeCloudinaryImage(article.image, 700))}"
 							alt="${escapeHTML(article.title || "")}"
 							loading="lazy"
 							decoding="async"
@@ -164,14 +166,12 @@ function createNewsCard(article) {
 		}
 
 		<div class="news-content">
-			<div class="news-date">
-				${escapeHTML(dateText)}
-			</div>
+			<div class="news-date ${dateIsManual ? "manual-date" : ""}"  ${dateIsManual ? 'dir="rtl"' : 'dir="ltr"'}>
+    ${escapeHTML(dateText)}
+</div>
 
 			<h3 class="news-title-card">
-				${escapeHTML(
-					article.title || "Untitled Article",
-				)}
+				${escapeHTML(article.title || "Untitled Article")}
 			</h3>
 		</div>
 	`;
@@ -194,10 +194,7 @@ function optimizeCloudinaryImage(url, width = 700) {
 		return url;
 	}
 
-	return url.replace(
-		"/upload/",
-		`/upload/f_auto,q_auto,w_${width}/`,
-	);
+	return url.replace("/upload/", `/upload/f_auto,q_auto,w_${width}/`);
 }
 
 // ==========================================
@@ -243,8 +240,7 @@ function renderPagination(currentPageArticleCount) {
 		this is the final page.
 	*/
 
-	const hasNextPage =
-		currentPageArticleCount === ARTICLES_PER_PAGE;
+	const hasNextPage = currentPageArticleCount === ARTICLES_PER_PAGE;
 
 	// ==========================================
 	// PREVIOUS BUTTON
@@ -269,10 +265,7 @@ function renderPagination(currentPageArticleCount) {
 	currentButton.className = "pagination-button active";
 	currentButton.textContent = currentPage;
 	currentButton.disabled = true;
-	currentButton.setAttribute(
-		"aria-current",
-		"page",
-	);
+	currentButton.setAttribute("aria-current", "page");
 
 	pagination.appendChild(currentButton);
 
@@ -295,11 +288,7 @@ function renderPagination(currentPageArticleCount) {
 // PAGINATION BUTTON
 // ==========================================
 
-function createPaginationButton(
-	text,
-	page,
-	ariaLabel,
-) {
+function createPaginationButton(text, page, ariaLabel) {
 	const button = document.createElement("button");
 
 	button.className = "pagination-button";
@@ -311,11 +300,9 @@ function createPaginationButton(
 
 		// Bring the user back to the beginning
 		// of the news cards.
-		document
-			.querySelector(".news-title")
-			?.scrollIntoView({
-				behavior: "smooth",
-			});
+		document.querySelector(".news-title")?.scrollIntoView({
+			behavior: "smooth",
+		});
 	});
 
 	return button;
